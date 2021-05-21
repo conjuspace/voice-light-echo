@@ -16,10 +16,17 @@ module.exports = {
   node: {
     fs: 'empty',
   },
-  entry: ['./src/js/app.js', './src/style/main.scss'],
+  entry: 
+  // {
+  //   app: './src/js/app.js',
+  //   videoVimeo: './src/js/videovimeo.js',
+  //   styles: './src/style/main.scss',
+  // },
+    ['./src/js/app.js', './src/style/main.scss'],
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'app.bundle.js',
+    filename: 'app.js',
+    // filename: '[name].js',
   },  
   module: {
     rules: [
