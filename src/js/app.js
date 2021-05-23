@@ -5,8 +5,7 @@ import videoVimeo from './videoVimeo';
 document.addEventListener('DOMContentLoaded', () => { 
   // hmbBtn;  
   console.log("DOMContentLoaded"); 
-  videoVimeo;
-  
+  videoVimeo();  
 });
 
 

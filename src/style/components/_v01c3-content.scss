@@ -1,0 +1,102 @@
+.start-screen{
+  padding: 20px;
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: space-between;
+  .start-texts{
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin-bottom: 18px;
+  }
+  .start-text{
+    font-family: 'Space Mono';
+    font-style: italic;
+    font-size: 20px;
+    line-height: 1.45;
+    color: #FFFFFF;
+    text-align: center;    
+    &:not(:last-child){
+      margin-bottom: 1em;
+    }
+  }
+  .btn-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 70px;
+  }  
+}
+.finish-screen{
+  display: none;
+  padding: 20px;
+  min-height: 100vh;  
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: space-between;
+  &.active{
+    display: flex;
+  }
+  .finish-texts{
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin-bottom: 18px;
+  }
+  .finish-text{
+    font-family: 'Space Mono';
+    font-style: italic;
+    font-size: 20px;
+    line-height: 1.45;
+    color: #FFFFFF;
+    text-align: center;    
+    &:not(:last-child){
+      margin-bottom: 1em;
+    }
+  }
+  .btn-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;    
+    margin-bottom: 70px;
+    .v01c3-btn{
+      &:not(:last-child){
+        margin-bottom: 10px;
+      }
+    }
+  }
+}
+.v01c3-btn{
+  @include outline(0);
+  border: none;
+  padding: 10px;
+  width: 100%;
+  min-height: 136px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #3918C0;   
+  font-family: 'Space Mono';
+  font-weight: 700;
+  color: #FFFFFF;
+  font-size: 20px;
+  line-height: 1.45; 
+  text-transform: uppercase;
+  .btn-icon{
+    margin-left: 8px;
+  }
+}
+.copyright{
+  font-family: 'Space Mono';
+  font-style: italic;
+  font-size: 12px;
+  line-height: 1.4;
+  color: #868686;
+  text-align: center;
+}
