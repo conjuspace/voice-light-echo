@@ -54,14 +54,12 @@ const videoVimeo = async () => {
   const getDescriptionsVideos = async ()=>{
     const json = await getDescriptionsData();    
     return json.description;
-  }  
-  
+  }
   videos = await getVimeoVideos();
   urls = videos.map(el=>el.link);
   console.log("videos:",videos);
   console.log("urls:",urls);
   console.log("uri:",videos.map(el=>el.uri));
-
   let descriptionsVideosStr = await getDescriptionsVideos();
   descriptionsVideos = descriptionsVideosStr.split('\n');
   // console.log("descriptionsVideos:",descriptionsVideos);
@@ -115,8 +113,6 @@ const videoVimeo = async () => {
     },{})
   );
   console.log("descriptionsVideosTimes:",descriptionsVideosTimes);
-  
-
   const createOptions = (url) => {       
     return {
       url: url,
@@ -196,17 +192,9 @@ const videoVimeo = async () => {
     document.getElementById('finish-screen').classList.add('active');
   }
   const startButton = document.getElementById('start-video');
-
   startButton.addEventListener('click',startPlayVideos);
   // startButton.addEventListener('click',testing);
-
-  const recalcSize = (resizeFrameFlag) => {     
-    // document.getElementById('videoW').innerHTML = videos[indVideo].width;
-    // document.getElementById('videoH').innerHTML = videos[indVideo].height;
-    // document.getElementById('playerW').innerHTML = playerWidth;
-    // document.getElementById('playerH').innerHTML = playerHeight;
-    // document.getElementById('videoAspWH').innerHTML = videos[indVideo].width/videos[indVideo].height;
-    // document.getElementById('playerAspWH').innerHTML = playerWidth/playerHeight;
+  const recalcSize = (resizeFrameFlag) => {
     let kV = videos[indVideo].width / videos[indVideo].height;
     let kP = playerWidth / playerHeight;
     if(kV > kP){

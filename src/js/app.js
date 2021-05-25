@@ -1,13 +1,14 @@
 /* eslint import/no-extraneous-dependencies: ["error", {"peerDependencies": true}] */
-// import hmbBtn from './hmbBtn';
+
 import videoVimeo from './videoVimeo';
 import contactInfo from './contactInfo';
+import typeWriteText from './typeWriteText';
 
-document.addEventListener('DOMContentLoaded', () => { 
-  // hmbBtn;  
-  console.log("DOMContentLoaded"); 
+
+document.addEventListener('DOMContentLoaded', () => {
+  typeWriteText();
   videoVimeo();
-  contactInfo();   
+  contactInfo(); 
 });
 
 
