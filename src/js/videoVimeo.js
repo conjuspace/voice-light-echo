@@ -9,7 +9,9 @@ const videoVimeo = async () => {
   let playerWidth = document.querySelector('.main').clientWidth;
   let playerHeight = document.querySelector('.main').clientHeight; 
   let iframePlayerWidth  = playerWidth;
-  let iframePlayerHeight = playerHeight; 
+  let iframePlayerHeight = playerHeight;
+  let descriptionsVideos = [];
+  let descriptionsVideosTimes = [];
 
   const changeSizeIframe = (w,h) => {
     document.querySelector('#vimeoPlayer iframe').width=w;
@@ -17,7 +19,7 @@ const videoVimeo = async () => {
   }  
   const getVimeoData = async ()=>{
     //per_page=30&page:1
-    const response = await fetch(`https://api.vimeo.com//albums/${collectionId}/videos?per_page=30&page:1`,{
+    const response = await fetch(`https://api.vimeo.com/albums/${collectionId}/videos?per_page=30&page:1`,{
       method: 'GET', // *GET, POST, PUT, DELETE, etc.
       mode: 'cors', // no-cors, *cors, same-origin      
       cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -34,40 +36,131 @@ const videoVimeo = async () => {
     const json = await getVimeoData();    
     return json.data;
   }  
+  const getDescriptionsData = async ()=>{
+    //per_page=30&page:1
+    const response = await fetch(`https://api.vimeo.com/albums/${collectionId}`,{
+      method: 'GET', // *GET, POST, PUT, DELETE, etc.
+      mode: 'cors', // no-cors, *cors, same-origin      
+      cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+      // credentials: 'same-origin', // include, *same-origin, omit    
+      headers: new Headers({
+        'Authorization': `Bearer ${token}`,      
+        'Content-Type': 'application/json',      
+        'Accept': 'application/vnd.vimeo.*+json;version=3.4', 
+      })
+    })
+    return response.json();    
+  }
+  const getDescriptionsVideos = async ()=>{
+    const json = await getDescriptionsData();    
+    return json.description;
+  }  
+  
   videos = await getVimeoVideos();
   urls = videos.map(el=>el.link);
   console.log("videos:",videos);
   console.log("urls:",urls);
   console.log("uri:",videos.map(el=>el.uri));
-  const createOptions = (url) => {    
+
+  let descriptionsVideosStr = await getDescriptionsVideos();
+  descriptionsVideos = descriptionsVideosStr.split('\n');
+  // console.log("descriptionsVideos:",descriptionsVideos);
+  descriptionsVideosTimes = descriptionsVideos.map(
+    el=>el.split('&').reduce((acc,cur,ind)=>{
+      let el;
+      switch (ind) {
+        case 0:
+          el= {'url': cur}
+          break;
+        case 1:
+          el= {'start': false}
+          let timestr = cur.slice(5);
+          if(timestr.split(':').length === 2){
+            let [min,sec] = timestr.split(':');
+            // el= {'start': `${min}m${sec}s`}
+            el= {'start': (+min * 60) + +sec}
+          }else if(timestr.split(':').length === 3){
+            let [hours,min,sec] = timestr.split(':');
+            // el= {'start': `${hours}h${min}m${sec}s`}
+            el= {'start': (+hours * 3600) + (+min * 60) + +sec}
+          }else if(timestr.split(':').length === 1){
+            let [sec] = timestr.split(':');
+            // el= {'start': `${sec}s`}
+            el= {'start': +sec}
+          }           
+          break;
+        case 2:
+          // el= {'end': cur.slice(3)}
+          el= {'end': false}
+          let timestrEnd = cur.slice(3);
+          if(timestrEnd.split(':').length === 2){
+            let [min,sec] = timestrEnd.split(':');
+            // el= {'end': `${min}m${sec}s`}
+            el= {'end': (+min * 60) + +sec}
+          }else if(timestrEnd.split(':').length === 3){
+            let [hours,min,sec] = timestrEnd.split(':');
+            // el= {'end': `${hours}h${min}m${sec}s`}
+            el= {'end': (+hours * 3600) + (+min * 60) + +sec}
+          }else if(timestrEnd.split(':').length === 1){
+            let [sec] = timestrEnd.split(':');
+            // el= {'end': `${sec}s`}
+            el= {'end': +sec}
+          }
+          break;
+      }      
+        return {
+          ...acc,
+          ...el,
+        }
+    },{})
+  );
+  console.log("descriptionsVideosTimes:",descriptionsVideosTimes);
+  
+
+  const createOptions = (url) => {       
     return {
       url: url,
       // id: 507026918, 
       height: iframePlayerHeight, //TOTO CALC WIDTH/HEIGHT
       width: iframePlayerWidth,   //TOTO CALC WIDTH/HEIGHT    
-      background: 1,  
+      background: 0, 
+      controls: false, 
       // responsive: true,
       autoplay: true,
-      muted: true,
-      loop: false,
-      speed: true
+      muted: false,
+      loop: false,      
     }
   }
-  const endVideoPlay = () => {
+  const endVideoPlay = () => {    
     if(players[indVideo]){   
       players[indVideo].off('ended', endVideoPlay);
       players[indVideo].destroy();
     }    
+    
     if(indVideo < urls.length-1){
-      indVideo++;  
+      indVideo++;
       playVideo(indVideo)
     }else{
       endPlayVideos();
     }
   }
+  const onTimeupdateControll = (data, endtime) => {    
+    if(data.seconds >= endtime){
+      endVideoPlay();
+    }
+  }
   const playVideo = (ind) => { 
-    recalcSize();
-    players[ind] = new Vimeo(document.getElementById('vimeoPlayer'), createOptions(urls[ind])); 
+    // recalcSize();
+    players[ind] = new Vimeo(document.getElementById('vimeoPlayer'), createOptions(`${urls[ind]}`)); 
+    let descriptions = descriptionsVideosTimes.find(el=>el.url===urls[ind]);       
+    if(descriptions){      
+      players[ind].setCurrentTime(descriptions.start);
+      players[ind].on('timeupdate', e=>onTimeupdateControll(e,descriptions.end));
+    }else{
+      console.log("without timing especially for video with wrong url");
+      players[ind].setCurrentTime(30);
+      players[ind].on('timeupdate', e=>onTimeupdateControll(e,60));
+    }
     players[ind].on('ended', endVideoPlay);
   }  
   const startPlayVideos = () => {    
