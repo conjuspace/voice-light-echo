@@ -150,7 +150,7 @@ const videoVimeo = async () => {
     }
   }
   const playVideo = (ind) => { 
-    // recalcSize();
+    recalcSize();
     players[ind] = new Vimeo(document.getElementById('vimeoPlayer'), createOptions(`${urls[ind]}`)); 
     let descriptions = descriptionsVideosTimes.find(el=>el.url===urls[ind]);       
     if(descriptions){      
@@ -164,7 +164,7 @@ const videoVimeo = async () => {
     players[ind].on('ended', endVideoPlay);
   }  
   const startPlayVideos = () => {    
-    document.querySelector('#start-screen').remove();
+    document.querySelector('#start-screen').classList.remove('active');
     if(urls.length){
       document.createElement('div');
       let vimaoPlayerContainer = document.createElement('div');
@@ -188,11 +188,18 @@ const videoVimeo = async () => {
     indVideo = 0;
     showFinishScreen();
   }
+  // const testing = () => {
+  //   document.querySelector('#start-screen').classList.remove('active');
+  //   showFinishScreen();
+  // }
   const showFinishScreen = () => {
     document.getElementById('finish-screen').classList.add('active');
   }
   const startButton = document.getElementById('start-video');
+
   startButton.addEventListener('click',startPlayVideos);
+  // startButton.addEventListener('click',testing);
+
   const recalcSize = (resizeFrameFlag) => {     
     // document.getElementById('videoW').innerHTML = videos[indVideo].width;
     // document.getElementById('videoH').innerHTML = videos[indVideo].height;
