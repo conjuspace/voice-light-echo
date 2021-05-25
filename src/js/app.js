@@ -2,11 +2,11 @@
 
 import videoVimeo from './videoVimeo';
 import contactInfo from './contactInfo';
-import typeWriteText from './typeWriteText';
+import typeWriteTextStart from './typeWriteTextStart';
 
 
 document.addEventListener('DOMContentLoaded', () => {
-  typeWriteText();
+  typeWriteTextStart();
   videoVimeo();
   contactInfo(); 
 });
