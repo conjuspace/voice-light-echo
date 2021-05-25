@@ -1,4 +1,5 @@
 import Vimeo from '@vimeo/player'
+import typeWriteTextFinish from './typeWriteTextFinish';
 const videoVimeo = async () => {  
   const collectionId = '8487711';
   const token = 'bea56d634c470a012f74981880877eed';
@@ -190,6 +191,7 @@ const videoVimeo = async () => {
   // }
   const showFinishScreen = () => {
     document.getElementById('finish-screen').classList.add('active');
+    typeWriteTextFinish();
   }
   const startButton = document.getElementById('start-video');
   startButton.addEventListener('click',startPlayVideos);

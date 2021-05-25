@@ -5,6 +5,7 @@ import contactInfo from './contactInfo';
 import typeWriteTextStart from './typeWriteTextStart';
 
 
+
 document.addEventListener('DOMContentLoaded', () => {
   typeWriteTextStart();
   videoVimeo();
