@@ -81,7 +81,7 @@ module.exports = {
     colors: true,
   },
   devtool: 'source-map',
-  externals: {
-    jquery: 'jQuery'
-  }
+  // externals: {
+  //   jquery: 'jQuery'
+  // }
 };

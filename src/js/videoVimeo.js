@@ -58,9 +58,9 @@ const videoVimeo = async () => {
   }
   videos = await getVimeoVideos();
   urls = videos.map(el=>el.link);
-  console.log("videos:",videos);
-  console.log("urls:",urls);
-  console.log("uri:",videos.map(el=>el.uri));
+  // console.log("videos:",videos);
+  // console.log("urls:",urls);
+  // console.log("uri:",videos.map(el=>el.uri));
   let descriptionsVideosStr = await getDescriptionsVideos();
   descriptionsVideos = descriptionsVideosStr.split('\n');
   // console.log("descriptionsVideos:",descriptionsVideos);
@@ -113,7 +113,7 @@ const videoVimeo = async () => {
         }
     },{})
   );
-  console.log("descriptionsVideosTimes:",descriptionsVideosTimes);
+  // console.log("descriptionsVideosTimes:",descriptionsVideosTimes);
   const createOptions = (url) => {       
     return {
       url: url,
@@ -154,9 +154,7 @@ const videoVimeo = async () => {
       players[ind].setCurrentTime(descriptions.start);
       players[ind].on('timeupdate', e=>onTimeupdateControll(e,descriptions.end));
     }else{
-      console.log("without timing especially for video with wrong url");
-      players[ind].setCurrentTime(30);
-      players[ind].on('timeupdate', e=>onTimeupdateControll(e,60));
+      console.log("without timing especially for video with wrong url");      
     }
     players[ind].on('ended', endVideoPlay);
   }  
