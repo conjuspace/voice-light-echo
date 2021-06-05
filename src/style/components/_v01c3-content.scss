@@ -32,8 +32,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 70px;
-  }  
+    margin-bottom: 20px;
+  } 
+  .logo-1{
+    display: block;
+    margin: 0 auto 10px;
+  } 
 }
 .finish-screen{
   display: none;
