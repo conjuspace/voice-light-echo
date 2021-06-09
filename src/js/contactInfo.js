@@ -4,7 +4,7 @@ const contactInfo = () => {
     e.preventDefault();
     let info = e.target.querySelector('.finish-input').value;  
     // console.log("sent info:", info);  
-    fetch("https://submit-form.com/X8CsE23g",
+    fetch("https://submit-form.com/2SmJ5kxQ",
     {
         headers: {
           'Accept': 'application/json',
