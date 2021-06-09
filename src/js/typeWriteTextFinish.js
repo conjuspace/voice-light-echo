@@ -15,9 +15,9 @@ const typeWriteTextFinish = () => {
     .pauseFor(1000)
     .typeString('<span class="finish-text">Listen,<br>surrender,<br>follow.<br>Let it emerge.<br>Enjoy.</span><br><br>')
     .pauseFor(1000)
-    .typeString('<span class="finish-text">4 days<br>6 hours<br>23 minutes<br>43 seconds</span><br><br>')    
-    .pauseFor(1000)
     .typeString('<span class="finish-text">Volume 2.</span><br>')
+    .pauseFor(1000)
+    .typeString('<span class="finish-text">4 days<br>6 hours<br>23 minutes<br>43 seconds</span><br><br>') 
     .start()    
     .callFunction(endAnime);
 }

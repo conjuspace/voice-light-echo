@@ -183,10 +183,10 @@ const videoVimeo = async () => {
     indVideo = 0;
     showFinishScreen();
   }
-  // const testing = () => {
-  //   document.querySelector('#start-screen').classList.remove('active');
-  //   showFinishScreen();
-  // }
+  const testing = () => {
+    document.querySelector('#start-screen').classList.remove('active');
+    showFinishScreen();
+  }
   const showFinishScreen = () => {
     document.getElementById('finish-screen').classList.add('active');
     typeWriteTextFinish();
