@@ -174,9 +174,11 @@ const videoVimeo = async () => {
     }
   }
   const resizeResolver = () => {
-    playerWidth = document.querySelector('.main').clientWidth;
-    playerHeight = document.querySelector('.main').clientHeight;
-    recalcSize(true);
+    if(document.querySelector('#vimeoPlayer iframe')){
+      playerWidth = document.querySelector('.main').clientWidth;
+      playerHeight = document.querySelector('.main').clientHeight;
+      recalcSize(true);
+    }
   }
   const endPlayVideos = () => {
     document.getElementById('vimeoPlayer').remove();
