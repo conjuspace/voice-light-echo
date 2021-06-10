@@ -31,3 +31,6 @@ This boilerplate contains integration with [Travis CI](https://travis-ci.org/).
 # 6) for create folder with result code for hosting use command - npm run build (code for hosting are in folder ./dist) The code from this folder can be hosted into any server(html/css/js - static pages).
 
 # Ctrl+C stops any of these command.
+
+
+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
