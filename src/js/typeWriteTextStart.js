@@ -2,6 +2,7 @@ import Typewriter from 'typewriter-effect/dist/core';
 const typeWriteTextStart = () => {
   let t1writer; 
   const endAnime = () => {
+    document.querySelector('#t1').querySelector('.Typewriter__cursor').remove(); 
     document.querySelectorAll('#start-screen button').forEach(e=>{      
       e.removeAttribute("disabled"); 
     })    
