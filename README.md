@@ -33,6 +33,8 @@ This boilerplate contains integration with [Travis CI](https://travis-ci.org/).
 # Ctrl+C stops any of these command.
 
 
+GITHUB_TOKEN
+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
 
 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
 
