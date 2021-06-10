@@ -29,4 +29,5 @@ This boilerplate contains integration with [Travis CI](https://travis-ci.org/).
 # 4) for start develop new feature use command - npm run start:dev project will be opened in browser on http://localhost:9000/ and automatically autoupdated any changes in HTML/SCSS/JS code
 # 5) for create folder with result code and serve him in http://127.0.0.1:8080 server use command - npm run start (code for check and server are in folder ./dist) not for developing? only for create dist folder with resulting code and to check result on localhost http://127.0.0.1:8080 server
 # 6) for create folder with result code for hosting use command - npm run build (code for hosting are in folder ./dist) The code from this folder can be hosted into any server(html/css/js - static pages).
+
 # Ctrl+C stops any of these command.
