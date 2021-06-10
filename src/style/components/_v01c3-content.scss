@@ -79,7 +79,26 @@
 .logo-1{
   display: block;
   margin: 0 auto 10px;
+  opacity: 0;
+  transition: 0.5s opacity ease-in-out 0.8s;
+  &.active{
+    opacity: 1;
+  }
 } 
+.copyright{
+  opacity: 0;
+  align-self: center;
+  font-family: 'Space Mono';
+  font-style: italic;
+  font-size: 12px;
+  line-height: 1.4;
+  color: #868686;
+  text-align: center;
+  transition: 0.5s opacity ease-in-out 0.8s;
+  &.active{
+    opacity: 1;
+  }
+}
 .v01c3-btn{
   @include outline(0);
   cursor: pointer;
@@ -119,15 +138,6 @@
       align-items: center;
     }
   }
-}
-.copyright{
-  align-self: center;
-  font-family: 'Space Mono';
-  font-style: italic;
-  font-size: 12px;
-  line-height: 1.4;
-  color: #868686;
-  text-align: center;
 }
 // .info{
 //   position: absolute;

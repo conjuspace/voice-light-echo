@@ -4,7 +4,8 @@ const typeWriteTextStart = () => {
   const endAnime = () => {
     document.querySelector('#t1').querySelector('.Typewriter__cursor').remove(); 
     document.querySelectorAll('#start-screen button').forEach(e=>{      
-      e.removeAttribute("disabled"); 
+      e.removeAttribute("disabled");
+      [...document.querySelectorAll('.logo-1, .copyright')].map(el=>el.classList.add('active'));
     })    
   }   
   t1writer = new Typewriter(document.getElementById('t1'), {

@@ -69,7 +69,8 @@ const typeWriteTextFinish = () => {
     document.querySelector('#t3').querySelector('.Typewriter__cursor').remove();  
     document.querySelector('.finish-input').removeAttribute("disabled");
     document.querySelectorAll('#finish-screen button').forEach(e=>{      
-      e.removeAttribute("disabled");      
+      e.removeAttribute("disabled"); 
+      [...document.querySelectorAll('.logo-1, .copyright')].map(el=>el.classList.add('active'));     
     })    
   }
   t1writer2
