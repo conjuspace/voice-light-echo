@@ -53,6 +53,8 @@ const contactInfo = () => {
         console.log('Oops, unable to copy');
       }
       e.preventDefault; 
+    }else{
+      window.open('whatsapp://send?text=Check out these unpredictable immersive audio & visuals');
     }      
   }
   shareBtn.addEventListener('click', shareInfo);
