@@ -70,7 +70,7 @@ const typeWriteTextFinish = () => {
     document.querySelector('.finish-input').removeAttribute("disabled");
     document.querySelectorAll('#finish-screen button').forEach(e=>{      
       e.removeAttribute("disabled"); 
-      [...document.querySelectorAll('.logo-1, .copyright')].map(el=>el.classList.add('active'));     
+      [...document.querySelectorAll('.finish-screen .logo-1,.finish-screen .copyright')].map(el=>el.classList.add('active'));     
     })    
   }
   t1writer2

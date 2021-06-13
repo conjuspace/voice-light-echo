@@ -13,6 +13,8 @@ const videoVimeo = async () => {
   let iframePlayerHeight = playerHeight;
   let descriptionsVideos = [];
   let descriptionsVideosTimes = [];
+  let fadeDuration = 0.5;
+  let soundFadeDuration = 1;
 
   const changeSizeIframe = (w,h) => {
     document.querySelector('#vimeoPlayer iframe').width=w;
@@ -146,19 +148,92 @@ const videoVimeo = async () => {
       endVideoPlay();
     }
   }
+  const addFadeFog = (timeoutFlag) => {
+    let oldFog = document.getElementById('fadeFog');    
+    if (oldFog) {
+      oldFog.remove();
+    }    
+    let fadeFog = document.createElement('div');
+    fadeFog.setAttribute("id", "fadeFog");
+    if(timeoutFlag){      
+      fadeFog.classList.add('fadeFog');    
+      document.querySelector('.js-main').appendChild(fadeFog);
+      setTimeout(()=>document.getElementById('fadeFog').classList.add('active'),0);      
+    }else{
+      fadeFog.classList.add('fadeFog','active');    
+      document.querySelector('.js-main').appendChild(fadeFog);      
+    }    
+  }
+  const hideFadeFog = () => { 
+    let fog = document.querySelector('#fadeFog');
+    if(fog){
+      fog.classList.remove('active');
+      setTimeout(()=>document.getElementById('fadeFog').remove(),500);   
+    }
+  }
+  const changeVolume = (player,start,end,step,duration) => {
+    let valueVolume = start;
+    let intervalT = (duration * 1000) / 4;
+    let min = Math.min(start,end);
+    let max = Math.max(start,end);
+    let fadeVolumeInterval = setInterval(() => { 
+      valueVolume = valueVolume + step;      
+      if (valueVolume>1) valueVolume=1;
+      if (valueVolume<0) valueVolume=0;      
+      console.log("set volume:", valueVolume.toFixed(1));
+      player.setVolume(valueVolume.toFixed(1));      
+      if( valueVolume.toFixed(1) >= max || valueVolume.toFixed(1) <= min ) clearInterval(fadeVolumeInterval);
+    }, intervalT);       
+  }
   const playVideo = (ind) => { 
     recalcSize();
     players[ind] = new Vimeo(document.getElementById('vimeoPlayer'), createOptions(`${urls[ind]}`)); 
-    let descriptions = descriptionsVideosTimes.find(el=>el.url===urls[ind]);       
+    let descriptions = descriptionsVideosTimes.find(el=>el.url===urls[ind]);  
+    let timeToEndFade, timeToEndSoundFade, timeToEndFadeFlag = false, timeToEndSoundFadeFlag = false, fadeEffectFlag = false;
+    // players[ind].setVolume(0); 
     if(descriptions){      
       players[ind].setCurrentTime(descriptions.start);
-      players[ind].on('timeupdate', e=>onTimeupdateControll(e,descriptions.end));
+      players[ind].on('timeupdate', e=>onTimeupdateControll(e,descriptions.end));         
     }else{
       console.log("without timing especially for video with wrong url");      
-    }
+    }    
+    // players[ind].on('bufferend', function(){
+    //   // this event not stalill fired!!!      
+    //   hideFadeFog();
+    //   changeVolume(players[ind],0.2,1,0.2,soundFadeDuration);
+    //   fadeEffectFlag = true;
+    // } ); 
+    players[ind].on('play', function(data){ 
+      this.setVolume(0.2);    
+      if(descriptions){      
+        timeToEndFade = descriptions.end - fadeDuration;
+        timeToEndSoundFade = descriptions.end - soundFadeDuration - 0.2; //correction
+      }else{
+        timeToEndFade = data.duration - fadeDuration;
+        timeToEndSoundFade = data.duration - soundFadeDuration - 0.2; //correction
+      } 
+    }); 
+    players[ind].on('timeupdate', function(data){
+      if(!fadeEffectFlag){        
+        hideFadeFog();
+        changeVolume(this,0.2,1,0.2,soundFadeDuration);
+        fadeEffectFlag = true;
+      }      
+      if(!timeToEndFadeFlag && (data.seconds > timeToEndFade) ){        
+        addFadeFog('with fade');        
+        timeToEndFadeFlag = true;
+      }   
+      if(!timeToEndSoundFadeFlag && (data.seconds > timeToEndSoundFade) ){
+        changeVolume(this,1,0.2,-0.2,soundFadeDuration);
+        timeToEndSoundFadeFlag = true;
+      }    
+    });
+    
+    
     players[ind].on('ended', endVideoPlay);
   }  
-  const startPlayVideos = () => {    
+  const startPlayVideos = () => { 
+    addFadeFog();
     document.querySelector('#start-screen').classList.remove('active');
     if(urls.length){
       document.createElement('div');
@@ -181,6 +256,7 @@ const videoVimeo = async () => {
     }
   }
   const endPlayVideos = () => {
+    hideFadeFog();
     document.getElementById('vimeoPlayer').remove();
     indVideo = 0;
     showFinishScreen();
