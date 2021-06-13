@@ -181,7 +181,9 @@ const videoVimeo = async () => {
       if (valueVolume>1) valueVolume=1;
       if (valueVolume<0) valueVolume=0;      
       // console.log("set volume:", valueVolume.toFixed(1));
-      player.setVolume(valueVolume.toFixed(1));      
+      if(player){     
+        player.setVolume(valueVolume.toFixed(1));      
+      }
       if( valueVolume.toFixed(1) >= max || valueVolume.toFixed(1) <= min ) clearInterval(fadeVolumeInterval);
     }, intervalT);       
   }
