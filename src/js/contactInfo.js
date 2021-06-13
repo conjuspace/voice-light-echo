@@ -54,7 +54,8 @@ const contactInfo = () => {
       }
       e.preventDefault; 
     }else{
-      window.open('whatsapp://send?text=Check out these unpredictable immersive audio & visuals ' + cpLink);
+      let whatsappText = `Check out these unpredictable immersive audio & visuals ${cpLink}`
+      window.open(`whatsapp://send?text=${whatsappText}`);
     }      
   }
   shareBtn.addEventListener('click', shareInfo);
