@@ -75,7 +75,7 @@ const typeWriteTextFinish = () => {
   }
   t1writer2
     .pauseFor(1000)
-    .typeString('<span class="finish-text">Listen,<br>surrender,<br>follow.<br>Let it emerge.<br>Enjoy.</span><br><br>')
+    .typeString('<span class="finish-text">Listen,<br>let it emerge.<br>surrender,<br>Enjoy.</span><br><br>')
     .pauseFor(1000)
     .typeString('<span class="finish-text">Volume 2.</span>')
     .pauseFor(1000)       

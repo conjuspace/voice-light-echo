@@ -14,13 +14,11 @@ const typeWriteTextStart = () => {
   });
   t1writer
     .pauseFor(1000)
-    .typeString('<span class="start-text">Unpredictable,<br>immersive audio & visuals.<br>Every week.</span><br><br>')
+    .typeString('<span class="start-text">Unpredictable, audio & visuals.<br>3 minutes, every Monday.</span><br><br>')
     .pauseFor(1000)
-    .typeString('<span class="start-text">No scroll.<br>No search.<br>No algorithm.</span><br><br>')    
+    .typeString('<span class="start-text">No scroll,<br>No search,<br>No algorithm.</span><br><br>')    
     .pauseFor(1000)
-    .typeString('<span class="start-text">Time to listen.<br>To what speaks to you.</span><br><br>')    
-    .pauseFor(1000)
-    .typeString('<span class="start-text">Use it,<br>however you wish.</span>')       
+    .typeString('<span class="start-text">Ready?</span>')       
     .start()    
     .callFunction(endAnime);
 }
