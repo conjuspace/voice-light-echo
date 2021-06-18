@@ -13,8 +13,8 @@ const videoVimeo = async () => {
   let iframePlayerHeight = playerHeight;
   let descriptionsVideos = [];
   let descriptionsVideosTimes = [];
-  let fadeDuration = 0.5;
-  let soundFadeDuration = 1;
+  let fadeDuration = 0.2;
+  let soundFadeDuration = 0.2;
 
   const changeSizeIframe = (w,h) => {
     document.querySelector('#vimeoPlayer iframe').width=w;
@@ -168,7 +168,7 @@ const videoVimeo = async () => {
     let fog = document.querySelector('#fadeFog');
     if(fog){
       fog.classList.remove('active');
-      setTimeout(()=>document.getElementById('fadeFog').remove(),500);   
+      setTimeout(()=>document.getElementById('fadeFog').remove(),soundFadeDuration * 1000);   
     }
   }
   const changeVolume = (player,start,end,step,duration) => {
