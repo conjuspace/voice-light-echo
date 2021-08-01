@@ -126,10 +126,8 @@ const videoVimeo = async () => {
       // id: 507026918, 
       height: iframePlayerHeight, //TOTO CALC WIDTH/HEIGHT
       width: iframePlayerWidth,   //TOTO CALC WIDTH/HEIGHT    
-      background: 0, 
-      // TEST
-      controls: false, 
-      // controls: iphoneFlag, 
+      background: 0,     
+      controls: iphoneFlag,
       // responsive: true,
       autoplay: true,
       muted: iphoneFlag,      
@@ -193,12 +191,10 @@ const videoVimeo = async () => {
     }, intervalT);       
   }
   const playVideo = (ind) => { 
-    // test
-    // recalcSize();
+    recalcSize();
     players[ind] = new Vimeo(document.getElementById('vimeoPlayer'), createOptions(`${urls[ind]}`)); 
     let descriptions = descriptionsVideosTimes.find(el=>el.url===urls[ind]);  
     let timeToEndFade, timeToEndSoundFade, timeToEndFadeFlag = false, timeToEndSoundFadeFlag = false, fadeEffectFlag = false;
-    // players[ind].setVolume(0); 
     
     if(descriptions){      
       players[ind].setCurrentTime(descriptions.start);
@@ -260,7 +256,6 @@ const videoVimeo = async () => {
       vimaoPlayerContainer.setAttribute("id", "vimeoPlayer");    
       document.querySelector('.main').appendChild(vimaoPlayerContainer);      
       window.addEventListener('resize', debounce(resizeResolver,50));
-      // document.getElementById('next-video').addEventListener('click', endVideoPlay);
       playVideo(indVideo);      
     }else{
       showFinishScreen();
