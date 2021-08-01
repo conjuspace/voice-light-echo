@@ -223,12 +223,12 @@ const videoVimeo = async () => {
       }
     }); 
     players[ind].on('timeupdate', function(data){ 
-
+      console.log("timeupdate data:",data);
       if(!fadeEffectFlag){        
         hideFadeFog();
-        if(!iphoneFlag){
+        // if(!iphoneFlag){
           changeVolume(this,0.2,1,0.2,soundFadeDuration);
-        }
+        // }
         fadeEffectFlag = true;
       }      
       if(!timeToEndFadeFlag && (data.seconds > timeToEndFade) ){        
@@ -236,9 +236,10 @@ const videoVimeo = async () => {
         timeToEndFadeFlag = true;
       }   
       if(!timeToEndSoundFadeFlag && (data.seconds > timeToEndSoundFade) ){
-        if(!iphoneFlag){
-          changeVolume(this,1,0.2,-0.2,soundFadeDuration);
-        }
+        changeVolume(this,1,0.2,-0.2,soundFadeDuration);
+        // if(!iphoneFlag){
+        //   changeVolume(this,1,0.2,-0.2,soundFadeDuration);
+        // }
         timeToEndSoundFadeFlag = true;
       }    
     });
