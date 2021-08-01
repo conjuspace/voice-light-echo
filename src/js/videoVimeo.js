@@ -209,17 +209,19 @@ const videoVimeo = async () => {
     //   hideFadeFog();
     //   changeVolume(players[ind],0.2,1,0.2,soundFadeDuration);
     //   fadeEffectFlag = true;
-    // } ); 
-    players[ind].on('play', function(data){ 
-      this.setVolume(0.2);    
-      if(descriptions){      
-        timeToEndFade = descriptions.end - fadeDuration;
-        timeToEndSoundFade = descriptions.end - soundFadeDuration - 0.2; //correction
-      }else{
-        timeToEndFade = data.duration - fadeDuration;
-        timeToEndSoundFade = data.duration - soundFadeDuration - 0.2; //correction
-      } 
-    }); 
+    // } );
+
+    // test iPhone
+    // players[ind].on('play', function(data){ 
+    //   this.setVolume(0.2);    
+    //   if(descriptions){      
+    //     timeToEndFade = descriptions.end - fadeDuration;
+    //     timeToEndSoundFade = descriptions.end - soundFadeDuration - 0.2; //correction
+    //   }else{
+    //     timeToEndFade = data.duration - fadeDuration;
+    //     timeToEndSoundFade = data.duration - soundFadeDuration - 0.2; //correction
+    //   } 
+    // }); 
     players[ind].on('timeupdate', function(data){
       if(!fadeEffectFlag){        
         hideFadeFog();
