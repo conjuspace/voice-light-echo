@@ -15,6 +15,10 @@ const videoVimeo = async () => {
   let descriptionsVideosTimes = [];
   let fadeDuration = 0.2;
   let soundFadeDuration = 0.2;
+  let iphoneFlag=false;
+  if((navigator.userAgent.match(/iPhone/i)) || (navigator.userAgent.match(/iPod/i))) {
+    if (document.cookie.indexOf("iphone_redirect=false") == -1) iphoneFlag=true;
+  }
 
   const changeSizeIframe = (w,h) => {
     document.querySelector('#vimeoPlayer iframe').width=w;
@@ -116,7 +120,7 @@ const videoVimeo = async () => {
     },{})
   );
   // console.log("descriptionsVideosTimes:",descriptionsVideosTimes);
-  const createOptions = (url) => {       
+  const createOptions = (url) => {     
     return {
       url: url,
       // id: 507026918, 
@@ -126,7 +130,7 @@ const videoVimeo = async () => {
       controls: false, 
       // responsive: true,
       autoplay: true,
-      muted: false,
+      muted: iphoneFlag,
       loop: false,      
     }
   }
