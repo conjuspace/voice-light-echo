@@ -127,7 +127,7 @@ const videoVimeo = async () => {
       height: iframePlayerHeight, //TOTO CALC WIDTH/HEIGHT
       width: iframePlayerWidth,   //TOTO CALC WIDTH/HEIGHT    
       background: 0,     
-      controls: false,
+      controls: iphoneFlag,
       // responsive: true,
       autoplay: true,
       muted: iphoneFlag,      
