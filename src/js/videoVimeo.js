@@ -226,9 +226,9 @@ const videoVimeo = async () => {
       console.log("timeupdate data:",data);
       if(!fadeEffectFlag){        
         hideFadeFog();
-        // if(!iphoneFlag){
+        if(!iphoneFlag){
           changeVolume(this,0.2,1,0.2,soundFadeDuration);
-        // }
+        }
         fadeEffectFlag = true;
       }      
       if(!timeToEndFadeFlag && (data.seconds > timeToEndFade) ){        
