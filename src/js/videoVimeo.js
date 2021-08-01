@@ -130,8 +130,7 @@ const videoVimeo = async () => {
       controls: false, 
       // responsive: true,
       autoplay: true,
-      // muted: iphoneFlag,
-      muted: true,
+      muted: iphoneFlag,      
       loop: false,      
     }
   }
