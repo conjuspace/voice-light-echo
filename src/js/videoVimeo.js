@@ -223,7 +223,7 @@ const videoVimeo = async () => {
     players[ind].on('timeupdate', function(data){
       if(!fadeEffectFlag){        
         hideFadeFog();
-        changeVolume(this,0.2,1,0.2,soundFadeDuration);
+        // changeVolume(this,0.2,1,0.2,soundFadeDuration);
         fadeEffectFlag = true;
       }      
       if(!timeToEndFadeFlag && (data.seconds > timeToEndFade) ){        
@@ -231,7 +231,7 @@ const videoVimeo = async () => {
         timeToEndFadeFlag = true;
       }   
       if(!timeToEndSoundFadeFlag && (data.seconds > timeToEndSoundFade) ){
-        changeVolume(this,1,0.2,-0.2,soundFadeDuration);
+        // changeVolume(this,1,0.2,-0.2,soundFadeDuration);
         timeToEndSoundFadeFlag = true;
       }    
     });
